@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Claude Code: 3 settings for day one</title>
+  <meta name="description" content="Copy-paste versions of the three settings from the reel: a CLAUDE.md, permission rules and a format hook. For anyone starting with Claude Code on a real project.">
+  <!-- what a link preview shows (Instagram DMs, WhatsApp, …): the title, the intro and the reel's cover -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://justdroppedtech.github.io/claude-code-settings/">
+  <meta property="og:title" content="Claude Code: 3 settings for day one">
+  <meta property="og:description" content="Copy-paste versions of the three settings from the reel: a CLAUDE.md, permission rules and a format hook. For anyone starting with Claude Code on a real project.">
+  <meta property="og:image" content="https://justdroppedtech.github.io/claude-code-settings/cover.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .art { display: block; width: 100%; max-width: 420px; aspect-ratio: 1; object-fit: cover; border-radius: 18px; margin: 20px 0 8px; }
+    .guide section { margin: 28px 0; }
+    .guide section.card { border: 1px solid var(--line); border-left: 6px solid var(--accent); border-radius: 12px; padding: 4px 18px 10px; }
+    .guide h2 { margin-top: 12px; }
+    .guide ol, .guide ul { padding-left: 22px; } .guide li { margin: 6px 0; } .guide li::marker { color: var(--accent); font-weight: 700; }
+    .guide aside { border-left: 4px solid var(--accent); padding: 4px 12px; margin: 12px 0; color: var(--muted); }
+    .guide code { font: 0.86em ui-monospace, Consolas, monospace; font-variant-ligatures: none; background: rgba(127,127,127,.12);
+      padding: 1px 5px; border-radius: 5px; overflow-wrap: anywhere; }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="handle" href="https://www.instagram.com/justdroppedtech/">@justdroppedtech</a>
+    <h1>Claude Code: 3 settings for day one</h1>
+    <p>Copy-paste versions of the three settings from the reel: a CLAUDE.md, permission rules and a format hook. For anyone starting with Claude Code on a real project.</p>
+    <img class="art" src="cover.jpg" alt="">
+    <div class="guide">
+<section class="card">
+<h2>Quick start</h2>
+<ol>
+<li>In your project, start Claude Code and type <code>/init</code> to write a starting CLAUDE.md.
+</li>
+<li>Paste the permissions block below into <code>.claude/settings.json</code> in your project root.
+</li>
+<li>Add the Prettier hook to the same file, then run <code>/status</code> and <code>/hooks</code> to check they loaded.
+</li></ol>
+</section>
+<section>
+<h2>Why these three</h2>
+<p>Each Claude Code session begins with a fresh context window. A CLAUDE.md is read at the start of every session, so your project, commands and rules come with you. Claude treats CLAUDE.md as context, not enforced configuration. Permission rules and hooks are different: Claude Code itself applies them, whatever the model decides.</p>
+</section>
+<section>
+<h2>Before you start</h2>
+<ul>
+<li>Claude Code installed, and a project folder you can open it in.
+</li>
+<li>Settings files are strict JSON: a <code>//</code> comment or a trailing comma is a syntax error.
+</li>
+<li>Where a setting goes decides who it applies to:
+<ul>
+<li><code>~/.claude/settings.json</code>: you, in every project on this machine.
+</li>
+<li><code>.claude/settings.json</code>: everyone working in the project. Commit it so teammates get it.
+</li>
+<li><code>.claude/settings.local.json</code>: you, in this one project only.
+</li></ul>
+</li>
+<li>The hook in setting 3 needs <code>jq</code> and Prettier (it runs <code>npx prettier</code>).
+</li></ul>
+</section>
+<section>
+<h2>Setting 1: a CLAUDE.md</h2>
+<ol>
+<li>Open your project and start Claude Code.
+</li>
+<li>Type <code>/init</code>. Claude analyzes your codebase and creates a CLAUDE.md with build commands, test instructions and the conventions it finds. If one already exists, <code>/init</code> suggests improvements instead of overwriting it.
+</li>
+<li>Read it and add what Claude would not find on its own: the commands you always run, the folders that matter, the &quot;always do X&quot; rules.
+</li>
+<li>Keep it under 200 lines. Longer files use more context and are followed less closely.
+</li>
+<li>Commit it as <code>./CLAUDE.md</code> (or <code>./.claude/CLAUDE.md</code>) so your team shares it.
+</li></ol>
+<p>A small starting point you can adapt (replace the commands with your own):</p>
+<p>```</p>
+<h1>Project notes for Claude</h1>
+<ul>
+<li>Build: npm run build
+</li>
+<li>Test: npm test (run it before every commit)
+</li>
+<li>Lint: npm run lint
+</li>
+<li>Use 2-space indentation
+</li>
+<li>API handlers live in src/api/handlers/
+</li></ul>
+<p>```</p>
+</section>
+<section>
+<h2>Setting 2: permissions in settings.json</h2>
+<ol>
+<li>Create <code>.claude/settings.json</code> in your project root (or open it if it exists).
+</li>
+<li>Paste this in. It lets Claude Code run your lint and test scripts without asking, and stops it reading <code>.env</code> files.
+</li>
+<li>Save, then run <code>/status</code> inside Claude Code to confirm the file loaded. <code>/permissions</code> lists every rule and the file it came from.
+</li></ol>
+<p>```</p>
+<p>{</p>
+<p>  &quot;permissions&quot;: {</p>
+<p>    &quot;allow&quot;: [</p>
+<p>      &quot;Bash(npm run lint)&quot;,</p>
+<p>      &quot;Bash(npm run test *)&quot;</p>
+<p>    ],</p>
+<p>    &quot;deny&quot;: [</p>
+<p>      &quot;Read(./.env)&quot;,</p>
+<p>      &quot;Read(./.env.*)&quot;</p>
+<p>    ]</p>
+<p>  }</p>
+<p>}</p>
+<p>```</p>
+<p>Rules are checked in order: deny, then ask, then allow. Deny rules block in every permission mode.</p>
+</section>
+<section>
+<h2>Setting 3: a hook that formats every edit</h2>
+<ol>
+<li>Add this <code>hooks</code> block to <code>.claude/settings.json</code> in your project root. If the file already has permissions, put <code>&quot;hooks&quot;</code> next to <code>&quot;permissions&quot;</code> inside the same outer braces.
+</li>
+<li>It runs Prettier on every file Claude edits or writes, after the edit.
+</li>
+<li>Type <code>/hooks</code> to see it listed. When it works, Claude Code shows nothing: the edited file is just formatted.
+</li></ol>
+<p>```</p>
+<p>{</p>
+<p>  &quot;hooks&quot;: {</p>
+<p>    &quot;PostToolUse&quot;: [</p>
+<p>      {</p>
+<p>        &quot;matcher&quot;: &quot;Edit|Write&quot;,</p>
+<p>        &quot;hooks&quot;: [</p>
+<p>          {</p>
+<p>            &quot;type&quot;: &quot;command&quot;,</p>
+<p>            &quot;command&quot;: &quot;jq -r '.tool_input.file_path' | xargs npx prettier --write&quot;</p>
+<p>          }</p>
+<p>        ]</p>
+<p>      }</p>
+<p>    ]</p>
+<p>  }</p>
+<p>}</p>
+<p>```</p>
+</section>
+<section>
+<h2>Settings 2 and 3 in one file</h2>
+<p>Your whole <code>.claude/settings.json</code> with both, ready to paste:</p>
+<p>```</p>
+<p>{</p>
+<p>  &quot;permissions&quot;: {</p>
+<p>    &quot;allow&quot;: [</p>
+<p>      &quot;Bash(npm run lint)&quot;,</p>
+<p>      &quot;Bash(npm run test *)&quot;</p>
+<p>    ],</p>
+<p>    &quot;deny&quot;: [</p>
+<p>      &quot;Read(./.env)&quot;,</p>
+<p>      &quot;Read(./.env.*)&quot;</p>
+<p>    ]</p>
+<p>  },</p>
+<p>  &quot;hooks&quot;: {</p>
+<p>    &quot;PostToolUse&quot;: [</p>
+<p>      {</p>
+<p>        &quot;matcher&quot;: &quot;Edit|Write&quot;,</p>
+<p>        &quot;hooks&quot;: [</p>
+<p>          {</p>
+<p>            &quot;type&quot;: &quot;command&quot;,</p>
+<p>            &quot;command&quot;: &quot;jq -r '.tool_input.file_path' | xargs npx prettier --write&quot;</p>
+<p>          }</p>
+<p>        ]</p>
+<p>      }</p>
+<p>    ]</p>
+<p>  }</p>
+<p>}</p>
+<p>```</p>
+</section>
+<section class="card">
+<h2>Try these</h2>
+<ul>
+<li>Allow another script you run often: add <code>&quot;Bash(npm run [script] *)&quot;</code> to <code>allow</code>.
+</li>
+<li>Block a secrets folder too: add <code>&quot;Read(./secrets/**)&quot;</code> to <code>deny</code>.
+</li>
+<li>Ask before every push: add <code>&quot;ask&quot;: [&quot;Bash(git push *)&quot;]</code> next to <code>allow</code> and <code>deny</code>.
+</li></ul>
+</section>
+<section>
+<h2>Gotchas</h2>
+<ul>
+<li>Claude follows CLAUDE.md as guidance, not as a rule it cannot break. Anything that must never happen belongs in a deny rule or a hook.
+</li>
+<li>A <code>Read(./.env)</code> rule covers the file tools and commands that name the file, such as <code>cat .env</code>. It does not stop every command that could read it, for example <code>grep -r</code> over the folder. The official settings examples cover how the sandbox closes that gap.
+</li>
+<li>On recent versions (v2.1.283 or later) Claude Code starts in auto mode, so you may see fewer prompts already. Allow and deny rules still apply in every mode.
+</li></ul>
+</section>
+<section>
+<h2>Links</h2>
+<ul>
+<li><a href="https://code.claude.com/docs/en/memory">How Claude remembers your project (CLAUDE.md)</a>
+</li>
+<li><a href="https://code.claude.com/docs/en/settings">Settings files</a>
+</li>
+<li><a href="https://code.claude.com/docs/en/permissions">Configure permissions</a>
+</li>
+<li><a href="https://code.claude.com/docs/en/settings-example">Example settings files</a>
+</li>
+<li><a href="https://code.claude.com/docs/en/hooks-guide">Automate actions with hooks</a>
+</li></ul>
+</section>
+    </div>
+    <h2>Save it</h2>
+    <ul>
+      <li><a href="claude-code-settings-guide.pdf" download>claude-code-settings-guide.pdf</a> <span class="muted">325 KB</span></li>
+    </ul>
+    <footer class="muted">
+      <a href="/">Home</a>
+      <a href="/privacy/">Privacy</a>
+    </footer>
+  </main>
+</body>
+</html>
