@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenDuet: the setup guide</title>
+  <meta name="description" content="Run your own proactive AI agent, the open-source take on Claude Duet, on your own computer. For people happy to use a terminal.">
+  <!-- what a link preview shows (Instagram DMs, WhatsApp, …): the title, the intro and the reel's cover -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://justdroppedtech.github.io/openduet-setup/">
+  <meta property="og:title" content="OpenDuet: the setup guide">
+  <meta property="og:description" content="Run your own proactive AI agent, the open-source take on Claude Duet, on your own computer. For people happy to use a terminal.">
+  <meta property="og:image" content="https://justdroppedtech.github.io/openduet-setup/cover.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .art { display: block; width: 100%; max-width: 420px; aspect-ratio: 1; object-fit: cover; border-radius: 18px; margin: 20px 0 8px; }
+    .guide section { margin: 28px 0; }
+    .guide section.card { border: 1px solid var(--line); border-left: 6px solid var(--accent); border-radius: 12px; padding: 4px 18px 10px; }
+    .guide h2 { margin-top: 12px; }
+    .guide ol, .guide ul { padding-left: 22px; } .guide li { margin: 6px 0; } .guide li::marker { color: var(--accent); font-weight: 700; }
+    .guide aside { border-left: 4px solid var(--accent); padding: 4px 12px; margin: 12px 0; color: var(--muted); }
+    .guide code { font: 0.86em ui-monospace, Consolas, monospace; font-variant-ligatures: none; background: rgba(127,127,127,.12);
+      padding: 1px 5px; border-radius: 5px; overflow-wrap: anywhere; }
+    .guide pre { background: rgba(127,127,127,.12); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; margin: 10px 0 16px;
+      white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.55; }
+    .guide pre code { background: none; padding: 0; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="handle" href="https://www.instagram.com/justdroppedtech/">@justdroppedtech</a>
+    <h1>OpenDuet: the setup guide</h1>
+    <p>Run your own proactive AI agent, the open-source take on Claude Duet, on your own computer. For people happy to use a terminal.</p>
+    <img class="art" src="cover.jpg" alt="">
+    <div class="guide">
+<section class="card">
+<h2>Quick start</h2>
+<ol>
+<li>Install Docker, Bun 1.3 or newer and Node, and have an OpenAI or Anthropic API key ready.
+</li>
+<li>Clone the repo, copy <code>.env.example</code> to <code>.env</code>, run <code>bun install</code>, then link a free CopilotKit Intelligence project.
+</li>
+<li>Add your model key to <code>.env</code>, run <code>bash scripts/start.sh</code> and open <code>localhost:3010</code>.
+</li></ol>
+</section>
+<section>
+<h2>What it is</h2>
+<p>OpenDuet is an open-source proactive agent from CopilotKit, released under the MIT licence. It sends you a morning brief, keeps working in its own browser, files and shell while you are away, and asks before it sends, pays, signs or deletes anything. It is an independent project, not made or endorsed by Anthropic.</p>
+<p>Claude Duet is Anthropic's own version: an app on iOS, Android and claude.ai, in a research preview by waitlist for Pro, Max and Ultra users in the US.</p>
+</section>
+<section>
+<h2>Before you start</h2>
+<ul>
+<li><strong>Docker</strong>, <strong>Bun 1.3 or newer</strong>, and <strong>Node</strong> (for <code>npx</code>, which runs the CopilotKit CLI).
+</li>
+<li><strong>A model key.</strong> OpenAI by default (<code>OPENAI_API_KEY</code>), or Anthropic (<code>ANTHROPIC_API_KEY</code>).
+</li>
+<li><strong>A CopilotKit Intelligence project.</strong> Required: it keeps OpenDuet's threads and memory, and the server will not start without its key. The README says the free Developer plan is enough.
+</li>
+<li>It is early: the README calls it &quot;Early, and in active development&quot;.
+</li></ul>
+</section>
+<section>
+<h2>Step 1: Get the code</h2>
+<p>Run every command from the repository root.</p>
+<pre><code>git clone https://github.com/CopilotKit/OpenDuet.git
+cd OpenDuet
+cp .env.example .env
+bun install</code></pre>
+</section>
+<section>
+<h2>Step 2: Link CopilotKit Intelligence</h2>
+<pre><code>npx --yes copilotkit@latest login
+npx --yes copilotkit@latest project select
+bun openbot/scripts/setup-learning.ts</code></pre>
+<p>The last command copies the project key to <code>INTELLIGENCE_API_KEY</code> in <code>.env</code>, which is the one the server reads.</p>
+</section>
+<section>
+<h2>Step 3: Add your model key</h2>
+<p>Open <code>.env</code> and add your key. The default Bot runs on OpenAI:</p>
+<pre><code>OPENAI_API_KEY=sk-...</code></pre>
+<p>To use Claude instead, set these in <code>.env</code>:</p>
+<pre><code>BOT_PROVIDER=anthropic
+ANTHROPIC_API_KEY=...</code></pre>
+<p>Optionally pick the model with <code>BOT_MODEL</code>, for example <code>BOT_MODEL=claude-sonnet-5-5</code>. Without it the README says the default is <code>claude-sonnet-4-5</code>.</p>
+</section>
+<section>
+<h2>Step 4: Start it</h2>
+<pre><code>bash scripts/start.sh</code></pre>
+<p>Then open <code>http://localhost:3010</code> in your browser. <strong>Settings → Setup</strong> in the app tells you whether your model key works.</p>
+<p>To stop it:</p>
+<pre><code>bash scripts/stop.sh</code></pre>
+</section>
+<section class="card">
+<h2>Try these</h2>
+<ul>
+<li>Ask the OpenDuet Bot to do something in its own browser, and watch it work on its computer.
+</li>
+<li>Choose what it must ask you about first in <code>/settings/approvals</code>.
+</li>
+<li>Ask it to do something on a schedule, then find it in <code>/routines</code>.
+</li></ul>
+</section>
+<section>
+<h2>Gotchas</h2>
+<ul>
+<li><strong>Port 5432 taken?</strong> Set <code>POSTGRES_PORT</code> in <code>.env</code> to a free port and change the port in <code>DATABASE_URL</code> to match.
+</li>
+<li><strong>Changed <code>.env</code>?</strong> The API reads it only at start: run <code>bash scripts/stop.sh</code>, then <code>bash scripts/start.sh</code>.
+</li>
+<li><strong>Gmail and Calendar</strong> need a Google OAuth client, set up once by an administrator (you, with the default <code>.env</code>). The README links the Google Cloud steps; a fake Google for testing ships in the repo.
+</li>
+<li><strong>No hosted version yet.</strong> The README says no hosted or deploy guide and no OpenDuet image are published, so the Quick start is the supported way to run it today.
+</li>
+<li><strong>Telemetry:</strong> set <code>COPILOTKIT_TELEMETRY_DISABLED=true</code> or <code>DO_NOT_TRACK=1</code> to turn it off.
+</li></ul>
+</section>
+<section>
+<h2>Links</h2>
+<ul>
+<li>OpenDuet on GitHub: <a href="https://github.com/CopilotKit/OpenDuet">https://github.com/CopilotKit/OpenDuet</a>
+</li>
+<li>Introducing Claude Duet (Anthropic): <a href="https://claude.com/resources/articles/claude-duet">https://claude.com/resources/articles/claude-duet</a>
+</li></ul>
+</section>
+    </div>
+    <h2>Save it</h2>
+    <ul>
+      <li><a href="openduet-setup-guide.pdf" download>openduet-setup-guide.pdf</a> <span class="muted">309 KB</span></li>
+    </ul>
+    <footer class="muted">
+      <a href="/">Home</a>
+      <a href="/privacy/">Privacy</a>
+    </footer>
+  </main>
+</body>
+</html>
