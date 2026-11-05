@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cognee: give Claude Code a memory</title>
+  <meta name="description" content="Set up the open-source Cognee memory plugin so Claude Code remembers your project across sessions. For anyone who uses Claude Code.">
+  <!-- what a link preview shows (Instagram DMs, WhatsApp, …): the title, the intro and the reel's cover -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://justdroppedtech.github.io/cognee-setup/">
+  <meta property="og:title" content="Cognee: give Claude Code a memory">
+  <meta property="og:description" content="Set up the open-source Cognee memory plugin so Claude Code remembers your project across sessions. For anyone who uses Claude Code.">
+  <meta property="og:image" content="https://justdroppedtech.github.io/cognee-setup/cover.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .art { display: block; width: 100%; max-width: 420px; aspect-ratio: 1; object-fit: cover; border-radius: 18px; margin: 20px 0 8px; }
+    .guide section { margin: 28px 0; }
+    .guide section.card { border: 1px solid var(--line); border-left: 6px solid var(--accent); border-radius: 12px; padding: 4px 18px 10px; }
+    .guide h2 { margin-top: 12px; }
+    .guide ol, .guide ul { padding-left: 22px; } .guide li { margin: 6px 0; } .guide li::marker { color: var(--accent); font-weight: 700; }
+    .guide aside { border-left: 4px solid var(--accent); padding: 4px 12px; margin: 12px 0; color: var(--muted); }
+    .guide code { font: 0.86em ui-monospace, Consolas, monospace; font-variant-ligatures: none; background: rgba(127,127,127,.12);
+      padding: 1px 5px; border-radius: 5px; overflow-wrap: anywhere; }
+    .guide pre { background: rgba(127,127,127,.12); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; margin: 10px 0 16px;
+      white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.55; }
+    .guide pre code { background: none; padding: 0; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="handle" href="https://www.instagram.com/justdroppedtech/">@justdroppedtech</a>
+    <h1>Cognee: give Claude Code a memory</h1>
+    <p>Set up the open-source Cognee memory plugin so Claude Code remembers your project across sessions. For anyone who uses Claude Code.</p>
+    <img class="art" src="cover.jpg" alt="">
+    <div class="guide">
+<section class="card">
+<h2>Quick start</h2>
+<ol>
+<li>In your terminal, add the marketplace: <code>claude plugin marketplace add topoteretes/cognee-integrations</code>
+</li>
+<li>Install the plugin: <code>claude plugin install cognee-memory@cognee</code>
+</li>
+<li>Start <code>claude</code> as usual. You should see a &quot;Cognee Memory Connected&quot; message.
+</li></ol>
+</section>
+<section>
+<h2>What it is</h2>
+<p>Cognee is an open-source AI memory platform for agents (Apache-2.0). Its Claude Code plugin captures your prompts, the tool calls</p>
+<p>Claude makes and its answers, turns them into a knowledge graph, and on your next prompt brings back the context that's relevant.</p>
+</section>
+<section>
+<h2>Before you start</h2>
+<ul>
+<li><strong>Claude Code</strong> with plugin support. The live status row and the two memory tools need Claude Code 2.1.287 or newer (2.1.286 in
+</li></ul>
+<p>  the Desktop app); the memory itself works on any Claude Code that reads plugin settings.</p>
+<ul>
+<li><strong>Python 3.10 to 3.14</strong> installed on your computer for local mode (the default). The plugin builds its own environment from it and
+</li></ul>
+<p>  never downloads Python for you. Check with <code>python --version</code>.</p>
+<ul>
+<li><strong>No API key needed.</strong> With no key set, local mode runs the graph building through your own Claude Code login. That uses your
+</li></ul>
+<p>  Claude plan's usage, and building the graph uses a lot of it. You can give it your own model key instead (Step 3).</p>
+</section>
+<section>
+<h2>Step 1: Install from your shell</h2>
+<p>Run both commands in a normal terminal, before you open Claude Code:</p>
+<ul>
+<li><code>claude plugin marketplace add topoteretes/cognee-integrations</code>
+</li>
+<li><code>claude plugin install cognee-memory@cognee</code>
+</li></ul>
+<p>The install is global for your user. Add <code>--scope project</code> to the second command to keep it to one project.</p>
+</section>
+<section>
+<h2>Step 2: Start a session</h2>
+<ul>
+<li>Run <code>claude</code> in your project folder.
+</li>
+<li>The first launch sets everything up: it starts a local Cognee server on your computer and builds its environment once.
+</li>
+<li>Look for the &quot;Cognee Memory Connected&quot; message.
+</li>
+<li>Installed from inside the chat with <code>/plugin</code> instead? Start a new session first: memory only connects on a fresh launch.
+</li></ul>
+</section>
+<section>
+<h2>Step 3: Pick how it builds the graph (optional)</h2>
+<p>Your settings live in one file, <code>~/.cognee/.env</code> (made for you on the first start).</p>
+<ul>
+<li><strong>Do nothing:</strong> it uses your Claude subscription (no key, uses your Claude limits).
+</li>
+<li><strong>Your own model key:</strong> add a line <code>LLM_API_KEY=&quot;your key&quot;</code> to <code>~/.cognee/.env</code>. Then the graph building uses that provider instead.
+</li>
+<li><strong>Cognee Cloud or your own server:</strong> add <code>COGNEE_BASE_URL=&quot;...&quot;</code> and <code>COGNEE_API_KEY=&quot;...&quot;</code> to the same file.
+</li>
+<li>Changes apply on the next session launch.
+</li></ul>
+</section>
+<section class="card">
+<h2>Try these</h2>
+<p>Ask Claude in plain words; the plugin picks the right skill:</p>
+<ul>
+<li><code>remember that we use pytest, not unittest</code>
+</li>
+<li><code>search Cognee for how we fixed the login bug</code>
+</li>
+<li><code>prep my standup</code>
+</li>
+<li><code>recap my week</code>
+</li>
+<li><code>index this repo</code>
+</li>
+<li><code>forget what we talked about [topic]</code>
+</li></ul>
+</section>
+<section>
+<h2>Gotchas</h2>
+<ul>
+<li><strong>It uses your Claude limits</strong> when no key is set: every graph build is a real Claude run on your plan. Set <code>LLM_API_KEY</code> to move
+</li></ul>
+<p>  that cost to your own provider.</p>
+<ul>
+<li><strong>Memory is kept until you delete it.</strong> Use the forget skill, or delete the dataset.
+</li>
+<li><strong>What it captures:</strong> your prompts, Claude's tool calls and answers. Keys, credentials and <code>.env</code> files are redacted or never
+</li></ul>
+<p>  captured. To stop automatic capture, set <code>COGNEE_CAPTURE=false</code> in <code>~/.cognee/.env</code>.</p>
+<ul>
+<li><strong>Remove it:</strong> <code>/plugin uninstall cognee-memory@cognee</code>
+</li></ul>
+</section>
+<section>
+<h2>Links</h2>
+<ul>
+<li><a href="https://github.com/topoteretes/cognee">Cognee on GitHub</a>
+</li>
+<li><a href="https://github.com/topoteretes/cognee-integrations/tree/main/integrations/claude-code">The Claude Code plugin and its full README</a>
+</li>
+<li><a href="https://docs.cognee.ai/">Cognee docs</a>
+</li></ul>
+</section>
+    </div>
+    <h2>Save it</h2>
+    <ul>
+      <li><a href="cognee-setup-guide.pdf" download>cognee-setup-guide.pdf</a> <span class="muted">309 KB</span></li>
+    </ul>
+    <footer class="muted">
+      <a href="/">Home</a>
+      <a href="/privacy/">Privacy</a>
+    </footer>
+  </main>
+</body>
+</html>
