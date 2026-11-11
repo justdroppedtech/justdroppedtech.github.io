@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Claude Sheets, Whiteboards and Data: the starter guide</title>
+  <meta name="description" content="Where to find Anthropic&#39;s three new tools, what each one does, and prompts you can copy to try them today. For anyone on a paid Claude plan.">
+  <!-- what a link preview shows (Instagram DMs, WhatsApp, …): the title, the intro and the reel's cover -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://justdroppedtech.github.io/claude-sheets/">
+  <meta property="og:title" content="Claude Sheets, Whiteboards and Data: the starter guide">
+  <meta property="og:description" content="Where to find Anthropic&#39;s three new tools, what each one does, and prompts you can copy to try them today. For anyone on a paid Claude plan.">
+  <meta property="og:image" content="https://justdroppedtech.github.io/claude-sheets/cover.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .art { display: block; width: 100%; max-width: 420px; aspect-ratio: 1; object-fit: cover; border-radius: 18px; margin: 20px 0 8px; }
+    .guide section { margin: 28px 0; }
+    .guide section.card { border: 1px solid var(--line); border-left: 6px solid var(--accent); border-radius: 12px; padding: 4px 18px 10px; }
+    .guide h2 { margin-top: 12px; }
+    .guide ol, .guide ul { padding-left: 22px; } .guide li { margin: 6px 0; } .guide li::marker { color: var(--accent); font-weight: 700; }
+    .guide aside { border-left: 4px solid var(--accent); padding: 4px 12px; margin: 12px 0; color: var(--muted); }
+    .guide code { font: 0.86em ui-monospace, Consolas, monospace; font-variant-ligatures: none; background: rgba(127,127,127,.12);
+      padding: 1px 5px; border-radius: 5px; overflow-wrap: anywhere; }
+    .guide pre { background: rgba(127,127,127,.12); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; margin: 10px 0 16px;
+      white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.55; }
+    .guide pre code { background: none; padding: 0; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="handle" href="https://www.instagram.com/justdroppedtech/">@justdroppedtech</a>
+    <h1>Claude Sheets, Whiteboards and Data: the starter guide</h1>
+    <p>Where to find Anthropic&#39;s three new tools, what each one does, and prompts you can copy to try them today. For anyone on a paid Claude plan.</p>
+    <img class="art" src="cover.jpg" alt="">
+    <div class="guide">
+<section class="card">
+<h2>Quick start</h2>
+<ol>
+<li>Open Claude on the web, the desktop app or your phone, on any paid plan.
+</li>
+<li>Ask for the thing you want: a sheet, a board or a dashboard, in one sentence. The prompts below are a good first try.
+</li>
+<li>Share it with your team, so you and Claude keep editing it together.
+</li></ol>
+</section>
+<section>
+<h2>What it is</h2>
+<p>On 10 November 2026 Anthropic launched Claude Whiteboards and Claude Sheets in beta, and Claude Dashboards became generally available as Claude Data. Whiteboards is a shared board where your team brainstorms with Claude, Sheets is a spreadsheet Claude builds and edits with you, and Claude Data turns your company's numbers into dashboards and data stories.</p>
+<p>The point is that the work stays in Claude. Before, you moved Claude's output into another tool, where Claude couldn't follow your changes. Now boards, sheets and dashboards live in Claude and your team keeps editing them there.</p>
+</section>
+<section>
+<h2>Before you start</h2>
+<ul>
+<li><strong>A paid Claude plan.</strong> All three are on all paid plans.
+</li>
+<li><strong>Web, desktop or mobile.</strong> All three work on each.
+</li>
+<li><strong>Whiteboards and Sheets are in beta.</strong> Anthropic says sheets have simple spreadsheet functionality for now, with more coming.
+</li>
+<li><strong>Claude Data needs a data connector,</strong> such as a warehouse or a CRM. Without one there is no company data for it to read.
+</li>
+<li><strong>On a Team plan,</strong> all three are on by default.
+</li>
+<li><strong>On an Enterprise plan,</strong> Whiteboards and Sheets are off by default, and Claude Data turns on by default on 19 November 2026. An admin changes these in <strong>Organization settings &gt; Artifacts</strong>.
+</li></ul>
+</section>
+<section>
+<h2>Step 1: Plan it on a whiteboard</h2>
+<ol>
+<li>Talk through a messy plan with Claude, out loud or typed. Claude turns it into a board with a timeline, owners and dates.
+</li>
+<li>Your team adds to the same board in real time. In a retro, for example, everyone adds notes, and Claude groups them by theme and drafts each person's action items.
+</li>
+<li>To ask about one part of the board, drag a box around it and ask Claude your question.
+</li>
+<li>When you're done, Claude can turn the board into a doc or a deck, or bring it into Lucid, Miro or Vani by Zoho.
+</li></ol>
+</section>
+<section>
+<h2>Step 2: Build it in a sheet</h2>
+<ol>
+<li>Ask for a sheet in one sentence. Claude builds it with tabs, formulas, formatting and drop-downs.
+</li>
+<li>When Claude edits cells, it outlines each new edit, so you can track what changed.
+</li>
+<li>Share the sheet with your team, and you and Claude work on it together.
+</li>
+<li>Need full Excel? Export to .xlsx or CSV, or use Claude for Excel. You can also carry on in Airtable, Asana, monday.com or Smartsheet.
+</li></ol>
+</section>
+<section>
+<h2>Step 3: Share a story with Claude Data</h2>
+<ol>
+<li>Connect a data source first (a warehouse or a CRM).
+</li>
+<li>Ask a question of your data, and Claude builds a dashboard.
+</li>
+<li>Ask Claude to draft a data story or a narrated video from your metrics, and review it before you share it.
+</li>
+<li>With live sharing (beta), colleagues see up-to-date numbers when they open your shared dashboard, even without access to your connectors. They see the results of the queries you approved and can't run others with your access.
+</li>
+<li>Your data team can certify the queries everyone should use (beta). Charts built on them carry a &quot;certified&quot; badge.
+</li></ol>
+</section>
+<section class="card">
+<h2>Try these</h2>
+<ul>
+<li><code>@Claude Lay out an illustrated timeline for the [product] launch, from [first step] to [last step].</code> (the prompt in Anthropic's demo, with your own launch)
+</li>
+<li><code>Draft a forecast for [what you sell]. Reference last year's numbers from the [Historical] tab.</code> (the sheet prompt in Anthropic's demo)
+</li>
+<li><code>Build a hiring budget for [team] with a tab per quarter, formulas for the totals and a drop-down for each role's status.</code>
+</li>
+<li><code>Make a campaign tracker for [campaign]: channels, owners, dates, budget and a status drop-down.</code>
+</li>
+<li><code>Here are everyone's retro notes. Group them by theme and draft the action items for each person.</code>
+</li>
+<li><code>Turn this board into a timeline with owners and dates.</code>
+</li>
+<li><code>Turn this dashboard into a short data story I can share with the team.</code>
+</li></ul>
+</section>
+<section>
+<h2>Gotchas</h2>
+<ul>
+<li><strong>Beta means rough edges.</strong> Sheets are simple spreadsheets for now; export to .xlsx when you need the full thing.
+</li>
+<li><strong>No data connector, no Claude Data.</strong> Connect a warehouse or a CRM first.
+</li>
+<li><strong>Enterprise users may not see Whiteboards and Sheets yet.</strong> They are off by default there until an admin turns them on.
+</li></ul>
+</section>
+<section>
+<h2>Links</h2>
+<ul>
+<li><a href="https://claude.com/resources/articles/sheets-whiteboards-data">Introducing Claude Whiteboards, Claude Sheets, and Claude Data (Anthropic)</a>
+</li>
+<li><a href="https://claude.com/resources/articles/more-ways-to-work-with-claude-sheets-whiteboards-and-interactive-connectors">More ways to work with Claude: Sheets, Whiteboards, and Interactive Connectors (Anthropic)</a>
+</li>
+<li><a href="https://www.youtube.com/watch?v=YewAJPawE7I">The launch video, &quot;Introducing Claude Whiteboards, Sheets, and Data&quot; (Claude on YouTube)</a>
+</li></ul>
+</section>
+    </div>
+    <h2>Save it</h2>
+    <ul>
+      <li><a href="claude-sheets-guide.pdf" download>claude-sheets-guide.pdf</a> <span class="muted">313 KB</span></li>
+    </ul>
+    <footer class="muted">
+      <a href="/">Home</a>
+      <a href="/privacy/">Privacy</a>
+    </footer>
+  </main>
+</body>
+</html>
