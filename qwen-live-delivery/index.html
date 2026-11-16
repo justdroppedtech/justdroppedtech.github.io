@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Qwen4-Max Live Delivery: the starter guide</title>
+  <meta name="description" content="Try Qwen&#39;s Live Delivery in Codex today: the agent hands you a working first version early, then keeps shipping while you steer.">
+  <!-- what a link preview shows (Instagram DMs, WhatsApp, …): the title, the intro and the reel's cover -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://justdroppedtech.github.io/qwen-live-delivery/">
+  <meta property="og:title" content="Qwen4-Max Live Delivery: the starter guide">
+  <meta property="og:description" content="Try Qwen&#39;s Live Delivery in Codex today: the agent hands you a working first version early, then keeps shipping while you steer.">
+  <meta property="og:image" content="https://justdroppedtech.github.io/qwen-live-delivery/cover.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .art { display: block; width: 100%; max-width: 420px; aspect-ratio: 1; object-fit: cover; border-radius: 18px; margin: 20px 0 8px; }
+    .guide section { margin: 28px 0; }
+    .guide section.card { border: 1px solid var(--line); border-left: 6px solid var(--accent); border-radius: 12px; padding: 4px 18px 10px; }
+    .guide h2 { margin-top: 12px; }
+    .guide ol, .guide ul { padding-left: 22px; } .guide li { margin: 6px 0; } .guide li::marker { color: var(--accent); font-weight: 700; }
+    .guide aside { border-left: 4px solid var(--accent); padding: 4px 12px; margin: 12px 0; color: var(--muted); }
+    .guide code { font: 0.86em ui-monospace, Consolas, monospace; font-variant-ligatures: none; background: rgba(127,127,127,.12);
+      padding: 1px 5px; border-radius: 5px; overflow-wrap: anywhere; }
+    .guide pre { background: rgba(127,127,127,.12); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; margin: 10px 0 16px;
+      white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.55; }
+    .guide pre code { background: none; padding: 0; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="handle" href="https://www.instagram.com/justdroppedtech/">@justdroppedtech</a>
+    <h1>Qwen4-Max Live Delivery: the starter guide</h1>
+    <p>Try Qwen&#39;s Live Delivery in Codex today: the agent hands you a working first version early, then keeps shipping while you steer.</p>
+    <img class="art" src="cover.jpg" alt="">
+    <div class="guide">
+<section class="card">
+<h2>Quick start</h2>
+<ol>
+<li>Install the plugin: <code>./live-delivery/install.sh --workspace /path/to/project</code>
+</li>
+<li>Start Codex with a time budget: <code>QWEN_LD_TIME_BUDGET=12m codex</code>
+</li>
+<li>Give it the job: <code>$ld:go [your task]</code>, then open the workbench link Codex prints.
+</li></ol>
+</section>
+<section>
+<h2>What it is</h2>
+<p>Live Delivery is how Qwen4-Max runs a long task: a usable first version early, then better versions one release at a time, and you can step in at any point to correct it or change direction. Qwen open-sourced it as a plugin, so you can try the same way of working in Codex CLI.</p>
+<p>In Qwen's own demo, a high school physics teacher asked for an interactive physics website with 100 topics. The first version (V1) arrived with 3 of the 100 pages. The run went on to 14 releases in 3h17min of agent work, with 3 messages from the user, one of them steering it mid-run: &quot;The opening lessons are too advanced. Start with the basics of motion…&quot;</p>
+</section>
+<section>
+<h2>Before you start</h2>
+<ul>
+<li><strong>Codex CLI.</strong> At launch the plugin works with Codex CLI only (tested with Codex 0.166.0 and 0.167.1).
+</li>
+<li><strong>Linux or macOS</strong>, and <strong>Node.js 22+</strong>.
+</li>
+<li><strong>Your own model and sign-in.</strong> It uses your Codex model, authentication and approval settings. No model or API key is included.
+</li>
+<li>Plugin version 0.1.0, Apache-2.0 licence.
+</li></ul>
+</section>
+<section>
+<h2>Step 1: Get the plugin</h2>
+<ul>
+<li>Get Qwen's repository, QwenLM/Qwen-Live-Delivery-Plugin, from GitHub (link at the end). The release archive needs no <code>npm install</code>.
+</li></ul>
+</section>
+<section>
+<h2>Step 2: Install it</h2>
+<ul>
+<li>Go into the plugin's folder: <code>cd /path/to/Qwen-Live-Delivery-Plugin</code>
+</li>
+<li>Run the installer with your project as the workspace: <code>./live-delivery/install.sh --workspace /path/to/project</code>
+</li>
+<li>Press Enter. It installs the plugin, sets up its hooks and opens Codex. If Codex was already open, start a new session.
+</li>
+<li>Only install, without opening Codex: add <code>--install-only</code>.
+</li>
+<li>Check the install: <code>./live-delivery/install.sh --doctor</code>
+</li>
+<li>Or let Codex install it. Give Codex the plugin's folder and ask: <code>Read /absolute/path/to/Qwen-Live-Delivery-Plugin/README.md and follow its installation skill to install and verify the plugin. Use /absolute/path/to/my-project as the workspace.</code>
+</li></ul>
+</section>
+<section>
+<h2>Step 3: Start Codex with a time budget</h2>
+<ul>
+<li><code>cd /path/to/project</code>
+</li>
+<li><code>QWEN_LD_TIME_BUDGET=12m codex</code>
+</li>
+<li>The budget takes minutes, hours or days, up to 7 days. You can change it later from the workbench.
+</li></ul>
+</section>
+<section>
+<h2>Step 4: Give it the job</h2>
+<ul>
+<li>Start your request with <code>$ld:go</code>. The README's own example: <code>$ld:go Build an offline pendulum experiment. Let me adjust the length, pause the animation, and understand how length affects the period. Make it work on mobile too.</code>
+</li></ul>
+</section>
+<section>
+<h2>Step 5: Watch it ship, and steer</h2>
+<ul>
+<li>Open the workbench link printed in Codex. It shows the plan and every delivered version.
+</li>
+<li>After the first delivery, pick a version on the right. Open <strong>Files</strong> to preview or download its files.
+</li>
+<li>Add requirements on the left. Enter sends; Shift+Enter makes a new line.
+</li>
+<li><strong>Time budget</strong> in the header changes the total time. <strong>Stop task</strong> finishes it. Delivered versions stay when you stop.
+</li></ul>
+</section>
+<section class="card">
+<h2>Try these</h2>
+<ul>
+<li><code>$ld:go Build an offline pendulum experiment. Let me adjust the length, pause the animation, and understand how length affects the period. Make it work on mobile too.</code>
+</li>
+<li><code>$ld:go Build an interactive [subject] website for [who it is for], covering [number] topics, one page per topic.</code> (the shape of the request in Qwen's demo; fill in your own)
+</li>
+<li>Mid-run, steer it the way the demo's teacher did: <code>The opening lessons are too advanced. Start with [the basics]. Move the harder topics to later chapters.</code>
+</li></ul>
+</section>
+<section>
+<h2>Gotchas</h2>
+<ul>
+<li>Codex CLI only for now. Other agent tools are on the plugin's to-do list, not done.
+</li>
+<li>Keep the sandbox on. Browser tasks run in the <code>workspace-write</code> sandbox by default. Setting <code>QWEN_LD_TASK_SANDBOX=danger-full-access</code> turns off the sandbox and per-command approval; the installer never does this for you.
+</li>
+<li>The workbench link gives access to your task: keep it private, and use it on a network you trust. For local access or SSH forwarding, set <code>QWEN_LD_BIND_HOST=127.0.0.1</code> before starting Codex.
+</li>
+<li>Delivery times are estimates, and stopping waits for the current tool to finish.
+</li></ul>
+</section>
+<section>
+<h2>Qwen4-Max itself</h2>
+<ul>
+<li>Available on QwenCloud, with the Token Plan or the API, and in QwenWork, Qoder and QwenStudio.
+</li>
+<li>On Qwen's own Work360 test, the average cost per task fell from $4.43 to $1.67 compared with Qwen3.8-Max (Qwen's figure).
+</li>
+<li>A 2.4-trillion-parameter model with native vision and a one-million-token context window (Qwen's launch post).
+</li></ul>
+</section>
+<section>
+<h2>Links</h2>
+<ul>
+<li>Qwen's launch post: <a href="https://qwen.ai/blog?id=qwen4-max">https://qwen.ai/blog?id=qwen4-max</a>
+</li>
+<li>The Live Delivery plugin: <a href="https://github.com/QwenLM/Qwen-Live-Delivery-Plugin">https://github.com/QwenLM/Qwen-Live-Delivery-Plugin</a>
+</li>
+<li>Qwen4-Max on QwenCloud: <a href="https://www.qwencloud.com/models/qwen4-max">https://www.qwencloud.com/models/qwen4-max</a>
+</li>
+<li>Token Plan: <a href="https://docs.qwencloud.com/token-plan/overview">https://docs.qwencloud.com/token-plan/overview</a>
+</li>
+<li>API: <a href="https://docs.qwencloud.com/developer-guides/getting-started/introduction">https://docs.qwencloud.com/developer-guides/getting-started/introduction</a>
+</li>
+<li>QwenWork: <a href="https://qwenwork.ai/">https://qwenwork.ai/</a>
+</li>
+<li>Qoder: <a href="https://qoder.com/">https://qoder.com/</a>
+</li>
+<li>QwenStudio: <a href="https://chat.qwen.ai/">https://chat.qwen.ai/</a>
+</li></ul>
+</section>
+    </div>
+    <h2>Save it</h2>
+    <ul>
+      <li><a href="qwen-live-delivery-guide.pdf" download>qwen-live-delivery-guide.pdf</a> <span class="muted">386 KB</span></li>
+    </ul>
+    <footer class="muted">
+      <a href="/">Home</a>
+      <a href="/privacy/">Privacy</a>
+    </footer>
+  </main>
+</body>
+</html>
