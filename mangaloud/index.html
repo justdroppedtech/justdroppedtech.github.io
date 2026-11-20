@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Manga Loud: the app and the setup steps</title>
+  <meta name="description" content="An Android app that reads manga, manhwa and webtoon speech bubbles aloud and acts them. For anyone who reads comics on an Android phone.">
+  <!-- what a link preview shows (Instagram DMs, WhatsApp, …): the title, the intro and the reel's cover -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://justdroppedtech.github.io/mangaloud/">
+  <meta property="og:title" content="Manga Loud: the app and the setup steps">
+  <meta property="og:description" content="An Android app that reads manga, manhwa and webtoon speech bubbles aloud and acts them. For anyone who reads comics on an Android phone.">
+  <meta property="og:image" content="https://justdroppedtech.github.io/mangaloud/cover.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .art { display: block; width: 100%; max-width: 420px; aspect-ratio: 1; object-fit: cover; border-radius: 18px; margin: 20px 0 8px; }
+    .guide section { margin: 28px 0; }
+    .guide section.card { border: 1px solid var(--line); border-left: 6px solid var(--accent); border-radius: 12px; padding: 4px 18px 10px; }
+    .guide h2 { margin-top: 12px; }
+    .guide ol, .guide ul { padding-left: 22px; } .guide li { margin: 6px 0; } .guide li::marker { color: var(--accent); font-weight: 700; }
+    .guide aside { border-left: 4px solid var(--accent); padding: 4px 12px; margin: 12px 0; color: var(--muted); }
+    .guide code { font: 0.86em ui-monospace, Consolas, monospace; font-variant-ligatures: none; background: rgba(127,127,127,.12);
+      padding: 1px 5px; border-radius: 5px; overflow-wrap: anywhere; }
+    .guide pre { background: rgba(127,127,127,.12); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; margin: 10px 0 16px;
+      white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.55; }
+    .guide pre code { background: none; padding: 0; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="handle" href="https://www.instagram.com/justdroppedtech/">@justdroppedtech</a>
+    <h1>Manga Loud: the app and the setup steps</h1>
+    <p>An Android app that reads manga, manhwa and webtoon speech bubbles aloud and acts them. For anyone who reads comics on an Android phone.</p>
+    <img class="art" src="cover.jpg" alt="">
+    <div class="guide">
+<section class="card">
+<h2>Quick start</h2>
+<ol>
+<li>On your Android phone, open the Manga Loud repo on GitHub, go to Releases, and download mangaloud-0.1.0.apk.
+</li>
+<li>Open the file and allow installs from this source when Android asks, then open Manga Loud.
+</li>
+<li>Open Settings › Text recognition, choose Claude API, paste your Claude API key, then open the demo chapter (link below) and tap Read aloud.
+</li></ol>
+</section>
+<section>
+<h2>What it is</h2>
+<p>Manga Loud is a browser for comic pages that reads the speech bubbles aloud. Claude reads each page and returns every bubble's text, who says it, the tone and how strong it is (1 mild, 2 clear, 3 extreme). A voice then acts each line: shouts louder, whispers quieter, thoughts a little softer. Before each line the page glides to the bubble and highlights it.</p>
+<p>It is free and open source (GPL-3.0). Arul built it. It ships with no comics and no comic sites: use it only with comics you are allowed to read.</p>
+</section>
+<section>
+<h2>Before you start</h2>
+<ul>
+<li>An Android phone with Android 8 or newer. There is no iPhone version.
+</li>
+<li>One way for Claude to read the pages (pick one):
+</li>
+<li>Claude API: an API key from console.anthropic.com. It works anywhere and is paid per use, billed by Anthropic.
+</li>
+<li>PC relay: your Claude Pro plan, Claude Code signed in on your computer, Node.js 20 or newer, and Tailscale on the computer and the phone. It uses your plan's usage limits, and the computer must be on.
+</li>
+<li>What it costs: the app is free. Reading the text costs your Claude API usage or your plan's limits. The phone voice is free and offline. Fish Audio has a free model, and ElevenLabs and Gemini need your own key and are billed by them. A chapter is cached on the phone, so reading it again costs nothing.
+</li></ul>
+</section>
+<section>
+<h2>Step 1: Install the app</h2>
+<p>Download mangaloud-0.1.0.apk from the repo's Releases page on your phone and open it. Android asks once to allow installs from your browser or file app: allow it, then install. If you prefer a computer, connect the phone with USB debugging on and use the adb command under Try these.</p>
+</section>
+<section>
+<h2>Step 2: Let Claude read the pages</h2>
+<p>Open Settings (the gear) › Text recognition.</p>
+<ul>
+<li>Claude API: choose Claude API, paste your key, and tap Test key.
+</li>
+<li>PC relay: on the computer, get the repo (git clone, or Code › Download ZIP on GitHub), open a terminal in its relay folder and run node server.mjs. It prints a setup link. Open that link on the phone, or copy it and tap Settings › PC relay › Paste setup link.
+</li></ul>
+</section>
+<section>
+<h2>Step 3: Pick a voice</h2>
+<p>Settings › Voice. The phone voice works straight away. For acted sounds, choose Fish Audio and add a Fish Audio API key: a cough, a sigh or a laugh is then acted as a real sound before the words. ElevenLabs and Gemini work the same way with their own keys. Leave &quot;Phone voice if this one fails&quot; on, so reading never stops.</p>
+</section>
+<section>
+<h2>Step 4: Hear it on the demo chapter</h2>
+<p>Open the demo chapter in the app (link below) and tap Read aloud. It is a short comic made for the project, with a shout, a whisper, a thought, narration, a game window and a cough, so you hear each kind of line.</p>
+</section>
+<section class="card">
+<h2>Try these</h2>
+<ul>
+<li>Install from a computer: <code class="whole">adb install -r mangaloud-0.1.0.apk</code>
+</li>
+<li>Get the relay: <code class="whole">git clone https://github.com/Aarul5/mangaloud</code>
+</li>
+<li>Start the relay: <code class="whole">cd mangaloud/relay</code> then <code class="whole">node server.mjs</code>
+</li>
+<li>Start the relay at sign-in on Windows: <code class="whole">powershell -ExecutionPolicy Bypass -File relay\install-autostart.ps1</code>
+</li>
+<li>Japanese manga: <code class="whole">Settings › Reading › Right to left</code>
+</li>
+<li>Keep further ahead of the voice: <code class="whole">Settings › Reading › Slices sent to Claude at a time › 8</code>
+</li>
+<li>Skip quest and stat windows: <code class="whole">Settings › Reading › Read game windows › off</code>
+</li>
+<li>Give one series its own voices: <code class="whole">⋮ › Voices for this series</code>
+</li></ul>
+</section>
+<section>
+<h2>Gotchas</h2>
+<ul>
+<li>Android only, installed from an APK (not from the Play Store).
+</li>
+<li>The PC relay listens on your Tailscale address only. If reading stops away from home, check Tailscale is on, on both devices.
+</li>
+<li>If a cloud voice fails (no key, no signal, out of credit), the phone voice reads that line and the app says why once.
+</li>
+<li>The phone voice can't cough or sigh: it leaves a short pause for those.
+</li>
+<li>To undo: uninstall Manga Loud like any app (hold its icon › Uninstall). Delete your API keys in the provider's console if you no longer need them. On Windows, remove the relay's start-up task with <code class="whole">relay\uninstall-autostart.ps1</code>.
+</li></ul>
+</section>
+<section>
+<h2>Links</h2>
+<ul>
+<li>Manga Loud on GitHub: <a href="https://github.com/Aarul5/mangaloud">https://github.com/Aarul5/mangaloud</a>
+</li>
+<li>Releases (the APK): <a href="https://github.com/Aarul5/mangaloud/releases">https://github.com/Aarul5/mangaloud/releases</a>
+</li>
+<li>Demo chapter: <a href="https://aarul5.github.io/mangaloud/demo/chapter-1/">https://aarul5.github.io/mangaloud/demo/chapter-1/</a>
+</li>
+<li>Claude API keys: <a href="https://console.anthropic.com">https://console.anthropic.com</a>
+</li></ul>
+</section>
+    </div>
+    <h2>Save it</h2>
+    <ul>
+      <li><a href="mangaloud-guide.pdf" download>mangaloud-guide.pdf</a> <span class="muted">350 KB</span></li>
+    </ul>
+    <footer class="muted">
+      <a href="/">Home</a>
+      <a href="/privacy/">Privacy</a>
+    </footer>
+  </main>
+</body>
+</html>
