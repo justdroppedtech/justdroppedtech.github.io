@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>daily_stock_analysis: the 4-step setup guide</title>
+  <meta name="description" content="An open-source AI that reads the prices and news for your watchlist every weekday and sends you a decision report. For learning and research, not investment advice.">
+  <!-- what a link preview shows (Instagram DMs, WhatsApp, …): the title, the intro and the reel's cover -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://justdroppedtech.github.io/daily-stock-analysis/">
+  <meta property="og:title" content="daily_stock_analysis: the 4-step setup guide">
+  <meta property="og:description" content="An open-source AI that reads the prices and news for your watchlist every weekday and sends you a decision report. For learning and research, not investment advice.">
+  <meta property="og:image" content="https://justdroppedtech.github.io/daily-stock-analysis/cover.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .art { display: block; width: 100%; max-width: 420px; aspect-ratio: 1; object-fit: cover; border-radius: 18px; margin: 20px 0 8px; }
+    .guide section { margin: 28px 0; }
+    .guide section.card { border: 1px solid var(--line); border-left: 6px solid var(--accent); border-radius: 12px; padding: 4px 18px 10px; }
+    .guide h2 { margin-top: 12px; }
+    .guide ol, .guide ul { padding-left: 22px; } .guide li { margin: 6px 0; } .guide li::marker { color: var(--accent); font-weight: 700; }
+    .guide aside { border-left: 4px solid var(--accent); padding: 4px 12px; margin: 12px 0; color: var(--muted); }
+    .guide code { font: 0.86em ui-monospace, Consolas, monospace; font-variant-ligatures: none; background: rgba(127,127,127,.12);
+      padding: 1px 5px; border-radius: 5px; overflow-wrap: anywhere; }
+    .guide pre { background: rgba(127,127,127,.12); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; margin: 10px 0 16px;
+      white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.55; }
+    .guide pre code { background: none; padding: 0; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="handle" href="https://www.instagram.com/justdroppedtech/">@justdroppedtech</a>
+    <h1>daily_stock_analysis: the 4-step setup guide</h1>
+    <p>An open-source AI that reads the prices and news for your watchlist every weekday and sends you a decision report. For learning and research, not investment advice.</p>
+    <img class="art" src="cover.jpg" alt="">
+    <div class="guide">
+<section class="card">
+<h2>Quick start</h2>
+<ol>
+<li>Open github.com/ZhuLinsen/daily_stock_analysis and click Fork (top right).
+</li>
+<li>In your fork: Settings → Secrets and variables → Actions → add an AI key, one notification channel and STOCK_LIST.
+</li>
+<li>Actions tab → enable workflows → Daily Stock Analysis → Run workflow.
+</li></ol>
+</section>
+<section>
+<h2>What it is</h2>
+<p>daily_stock_analysis is a free, MIT-licensed project by ZhuLinsen on GitHub (about 74,000 stars on 24 Nov 2026). For each stock on your watchlist it pulls quotes, technical indicators, news and announcements, and an AI model writes a decision report: a core conclusion, a score, the trend, risk alerts, catalysts and an action checklist.</p>
+<p>It covers A-shares, Hong Kong, US, Japanese, Korean and Taiwan stocks, plus ETFs. It runs on the AI model you bring: Gemini, Claude, an OpenAI-compatible provider (DeepSeek, Qwen and others) or a local Ollama model.</p>
+<p>The project's own words: it is for learning and research use only and is not investment advice. Do your own research.</p>
+</section>
+<section>
+<h2>Before you start</h2>
+<p>You need a free GitHub account, and one AI API key (Gemini, Anthropic Claude, or an OpenAI-compatible provider).</p>
+<p>What it costs: GitHub Actions runs it with no server; the README says a run takes about 2 to 5 minutes, about 44 to 110 minutes a month, well inside GitHub's free 2,000 minutes. Your AI key is billed by its provider per use (Gemini's free tier works but is rate-limited). The default market data is free, and the README warns free sources can be rate-limited.</p>
+</section>
+<section>
+<h2>Step 1: Fork the repo</h2>
+<p>Open the repo page on GitHub and click Fork in the top-right corner. Your copy is where it runs.</p>
+</section>
+<section>
+<h2>Step 2: Add your secrets</h2>
+<p>In your fork: Settings → Secrets and variables → Actions → New repository secret. Add one of each:</p>
+<ul>
+<li>An AI key: GEMINI_API_KEY, or ANTHROPIC_API_KEY, or OPENAI_API_KEY with OPENAI_BASE_URL and OPENAI_MODEL for DeepSeek, Qwen and other OpenAI-compatible providers.
+</li>
+<li>Where the report goes: TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID, or DISCORD_WEBHOOK_URL, or SLACK_BOT_TOKEN + SLACK_CHANNEL_ID, or EMAIL_SENDER + EMAIL_PASSWORD (WeChat Work and Feishu webhooks work too).
+</li>
+<li>STOCK_LIST: your watchlist, codes separated by commas (formats under Try these).
+</li>
+<li>Recommended: one news search key, such as SERPAPI_API_KEYS or TAVILY_API_KEYS. The README says news search strongly improves the report.
+</li></ul>
+</section>
+<section>
+<h2>Step 3: Enable Actions</h2>
+<p>Open the Actions tab of your fork and click &quot;I understand my workflows, go ahead and enable them&quot;.</p>
+</section>
+<section>
+<h2>Step 4: Run the workflow</h2>
+<p>Actions → Daily Stock Analysis → Run workflow → Run workflow. Your first report arrives on your channel when it finishes. After that it runs on its own every weekday at 18:00 Beijing time (10:00 UTC) and skips non-trading days.</p>
+</section>
+<section class="card">
+<h2>Try these</h2>
+<ul>
+<li>STOCK_LIST code formats, from the README's own example (formats, not picks): <code>[US ticker],hk[5-digit HK code],[6-digit A-share code],[code].T,[code].KS,[code].TW</code>
+</li>
+<li>Test without sending anything (local copy): <code class="whole">python main.py --dry-run</code>
+</li>
+<li>Analyse a few codes once: <code class="whole">python main.py --stocks [CODE1],[CODE2]</code>
+</li>
+<li>A market review instead of single stocks: <code class="whole">python main.py --market-review</code>
+</li>
+<li>The web workspace on your own computer: <code class="whole">python main.py --webui</code>
+</li>
+<li>Use it from Claude Code: <code class="whole">/plugin marketplace add ZhuLinsen/daily_stock_analysis</code>
+</li>
+<li>Then install the plugin: <code class="whole">/plugin install daily-stock-analysis@daily-stock-analysis</code>
+</li>
+<li>The local copy, for the commands above: <code class="whole">git clone https://github.com/ZhuLinsen/daily_stock_analysis.git</code>
+</li></ul>
+</section>
+<section>
+<h2>Gotchas</h2>
+<p>The schedule is set in Beijing time (18:00, 10:00 UTC); change the cron line in .github/workflows/00-daily-analysis.yml for another time.</p>
+<p>Ollama suits a local or Docker setup; the README says GitHub Actions runs smoother with a cloud API key.</p>
+<p>Free data sources can be rate-limited or change without notice; the README suggests token-based sources (Tushare, Longbridge, TickPlus) for steadier data.</p>
+<p>The report is the AI's reading of the data, not advice. Check it before you act on anything.</p>
+<p>To stop it: Actions → Daily Stock Analysis → the &quot;...&quot; menu → Disable workflow. To remove it: your fork's Settings → Delete this repository.</p>
+</section>
+<section>
+<h2>Links</h2>
+<p>The repo: <a href="https://github.com/ZhuLinsen/daily_stock_analysis">https://github.com/ZhuLinsen/daily_stock_analysis</a></p>
+<p>English README: <a href="https://github.com/ZhuLinsen/daily_stock_analysis/blob/main/docs/README_EN.md">https://github.com/ZhuLinsen/daily_stock_analysis/blob/main/docs/README_EN.md</a></p>
+<p>Full guide: <a href="https://github.com/ZhuLinsen/daily_stock_analysis/blob/main/docs/full-guide_EN.md">https://github.com/ZhuLinsen/daily_stock_analysis/blob/main/docs/full-guide_EN.md</a></p>
+</section>
+    </div>
+    <h2>Save it</h2>
+    <ul>
+      <li><a href="daily-stock-analysis-guide.pdf" download>daily-stock-analysis-guide.pdf</a> <span class="muted">327 KB</span></li>
+    </ul>
+    <footer class="muted">
+      <a href="/">Home</a>
+      <a href="/privacy/">Privacy</a>
+    </footer>
+  </main>
+</body>
+</html>
